@@ -11,7 +11,28 @@ namespace Laborator1
         static void Main(string[] args)
         {
             //Rotatie();
+            //Suma();
 
+        }
+
+        private static void Suma()
+        {
+            int n, suma = 0;
+
+            n = int.Parse(Console.ReadLine());
+
+            int[] v = new int[n];
+
+            for (int i = 0; i < n; i++)
+            {
+                v[i] = i + 1;
+            }
+
+            for (int i = 0; i < n; i++)
+            {
+                suma += v[i];
+            }
+            Console.WriteLine(suma);
         }
 
         private static void Rotatie()
