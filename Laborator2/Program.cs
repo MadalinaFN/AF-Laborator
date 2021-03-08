@@ -11,7 +11,7 @@ namespace Laborator2
         static void Main(string[] args)
         {
             //MaxAbsDif();
-            Adaugam1();
+            //Adaugam1();
         }
 
         private static void Adaugam1()
