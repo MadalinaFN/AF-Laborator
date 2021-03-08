@@ -11,7 +11,7 @@ namespace Laborator2
         static void Main(string[] args)
         {
             //MaxAbsDif();
-            //Adaugam1();
+            Adaugam1();
         }
 
         private static void Adaugam1()
@@ -47,8 +47,12 @@ namespace Laborator2
 
             for (int i = n - 2; i >= 0; i--)
             {
-                v[i] = (v[i] + carry) % 10;
-                carry = (v[i] + 1) / 10;
+                int aux = v[i] + carry;
+                if (carry == 1)
+                {
+                    v[i] = aux % 10;
+                    carry = aux / 10;
+                }
             }
 
             if (carry == 1)
