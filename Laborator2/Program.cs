@@ -11,6 +11,57 @@ namespace Laborator2
         static void Main(string[] args)
         {
             //MaxAbsDif();
+            //Adaugam1();
+        }
+
+        private static void Adaugam1()
+        {
+            int n = int.Parse(Console.ReadLine());
+
+            int[] v = new int[n];
+
+            for (int i = 0; i < n; i++)
+            {
+                //v[i] = rnd.Next(10);
+                v[i] = int.Parse(Console.ReadLine());
+            }
+
+            AddOneToVector(v);
+        }
+
+        private static void AddOneToVector(int[] v)
+        {
+            if (v.Length == 0)
+            {
+                Console.WriteLine("Nu avem valori in vector");
+                return;
+            }
+            int carry = 0, n = v.Length;
+
+            if (v[n - 1] + 1 >= 10)
+            {
+                carry = 1;
+            }
+
+            v[n - 1] = (v[n - 1] + 1) % 10;
+
+            for (int i = n - 2; i >= 0; i--)
+            {
+                v[i] = (v[i] + carry) % 10;
+                carry = (v[i] + 1) / 10;
+            }
+
+            if (carry == 1)
+            {
+                Array.Resize(ref v, n + 1);
+                v[0] = carry;
+            }
+
+            for (int i = 0; i < v.Length; i++)
+            {
+                Console.Write(v[i]);
+            }
+            Console.WriteLine();
         }
 
         static Random rnd = new Random();
