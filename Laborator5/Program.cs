@@ -10,7 +10,23 @@ namespace Laborator5
     {
         static void Main(string[] args)
         {
-            Recursivitate();
+            //Recursivitate();
+            SumaRecursiva();
+        }
+
+        private static void SumaRecursiva()
+        {
+            int n = int.Parse(Console.ReadLine());
+            Console.WriteLine(Suma(n, 1));
+        }
+
+        private static int Suma(int n, int currentnumber)
+        {
+            if (currentnumber == n)
+            {
+                return currentnumber;
+            }
+            return Suma(n, currentnumber + 1) + currentnumber;
         }
 
         private static void Recursivitate()
