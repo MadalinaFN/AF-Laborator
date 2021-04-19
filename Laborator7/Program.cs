@@ -10,7 +10,92 @@ namespace Laborator7
     {
         static void Main(string[] args)
         {
-            ProblemaReginelor();
+            //ProblemaReginelor();
+            ProblemaReginelorGenerala();
+        }
+
+        private static void ProblemaReginelorGenerala()
+        {
+            int n = 5;
+            int[,] tabla = new int[n, n];
+
+            if (backtr(n, tabla, 0))
+            {
+                afisare(n, tabla);
+            }
+        }
+
+        static bool backtr(int n, int[,] tabla, int col)
+        {
+            if (col >= n)
+            {
+                return true;
+            }
+            else
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    if (candidate(n, tabla, col, i))
+                    {
+                        tabla[i, col] = 1;
+                        if (backtr(n, tabla, col + 1))
+                        {
+                            return true;
+                        }
+                        tabla[i, col] = 0;
+                    }
+                }
+            }
+            return false;
+        }
+
+        static bool candidate(int n, int[,] tabla, int col, int linie)
+        {
+            //stanga liniei
+            for (int i = 0; i < col; i++)
+            {
+                if (tabla[linie, i] == 1)
+                {
+                    return false;
+                }
+            }
+            //coloana sus
+            for (int i = 0; i < linie; i++)
+            {
+                if (tabla[i, col] == 1)
+                {
+                    return false;
+                }
+            }
+            //diagonala stanga sus
+            for (int i = linie, j = col; i >= 0 && j >= 0; i--, j--)
+            {
+                if (tabla[i, j] == 1)
+                {
+                    return false;
+                }
+            }
+            //diagonala stanga jos
+            for (int i = linie, j = col; i < n && j >= 0; i++, j--)
+            {
+                if (tabla[i, j] == 1)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        static void afisare(int n, int[,] tabla)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    Console.Write(tabla[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
         }
 
         private static void ProblemaReginelor()
