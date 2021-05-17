@@ -12,7 +12,6 @@ namespace Laborator1
         {
             //Rotatie();
             //Suma();
-
         }
 
         private static void Suma()
