@@ -112,7 +112,80 @@ namespace Laborator11
     {
         static void Main(string[] args)
         {
-            QuickSort();
+            //QuickSort();
+            //SieveOfAtkin();
+        }
+
+        private static void SieveOfAtkin()
+        {
+            int limit = 20;
+            SieveOfAtkin1(limit);
+        }
+        static int SieveOfAtkin1(int limit)
+        {
+            // 2 si 3 sunt stiute ca nr prime
+            if (limit > 2)
+                Console.Write(2 + " ");
+
+            if (limit > 3)
+                Console.Write(3 + " ");
+
+            // Initialise the sieve array with
+            // false values
+            bool[] sieve = new bool[limit];
+
+            for (int i = 0; i < limit; i++)
+                sieve[i] = false;
+
+            /* Marcam Sita [n] este adevărata dacă unul dintre
+            următoarele sunt adevărate:
+            a) n = (4 * x * x) + (y * y) are număr impar
+               de soluții, adică, există
+               număr impar de perechi distincte
+               (x, y) care satisfac ecuația
+               și n% 12 = 1 sau n% 12 = 5.
+            b) n = (3 * x * x) + (y * y) are număr impar
+               de soluții și n% 12 = 7
+            c) n = (3 * x * x) - (y * y) are număr impar
+               de soluții, x> y și n% 12 = 11 */
+            for (int x = 1; x * x < limit; x++)
+            {
+                for (int y = 1; y * y < limit; y++)
+                {
+
+                    // Partea principală a sitei Atkin
+                    int n = (4 * x * x) + (y * y);
+                    if (n <= limit && (n % 12 == 1 || n % 12 == 5))
+
+                        sieve[n] ^= true;
+
+                    n = (3 * x * x) + (y * y);
+                    if (n <= limit && n % 12 == 7)
+                        sieve[n] ^= true;
+
+                    n = (3 * x * x) - (y * y);
+                    if (x > y && n <= limit && n % 12 == 11)
+                        sieve[n] ^= true;
+                }
+            }
+
+            // Marcați toți multiplii de pătrate ca
+            // non-prime
+            for (int r = 5; r * r < limit; r++)
+            {
+                if (sieve[r])
+                {
+                    for (int i = r * r; i < limit;
+                         i += r * r)
+                        sieve[i] = false;
+                }
+            }
+
+            // Imprimați primele folosind sita[]
+            for (int a = 5; a < limit; a++)
+                if (sieve[a])
+                    Console.Write(a + " ");
+            return 0;
         }
 
         private static void QuickSort()
